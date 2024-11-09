@@ -14,7 +14,7 @@ import com.mydbs.insurance.insurance_management.model.User;
 import com.mydbs.insurance.insurance_management.repository.UserRepository;
 import com.mydbs.insurance.insurance_management.util.JwtUtil;
 
-import java.util.HashSet;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +30,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
         user.setFullName(request.getFullName());
-        user.setRoles(new HashSet<>(request.getRoles()));
+        user.setRoles(Collections.singleton(request.getRole()));
         
         userRepository.save(user);
         
