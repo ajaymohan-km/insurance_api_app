@@ -58,4 +58,13 @@ public class UserService implements UserDetailsService {
     public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
+    public List<User> getActiveServiceProviders() {
+        return userRepository.findByRolesContainingAndEnabled("SERVICE_PROVIDER", true);
+    }
+
+    public List<User> getAllServiceProviders() {
+        return userRepository.findByRoles("SERVICE_PROVIDER");
+    }
+    
 }
+

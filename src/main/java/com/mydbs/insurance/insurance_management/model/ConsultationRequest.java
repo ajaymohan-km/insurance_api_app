@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 @Data
 public class ConsultationRequest {
     private String serviceProviderId;
-    private String policyId;
+    private String planId;
     private LocalDateTime scheduledTime;
     private String notes;
 }

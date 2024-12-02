@@ -9,4 +9,5 @@ public class ClaimRequest {
     private String consultationId;
     private BigDecimal amount;
     private String description;
+    private String serviceProviderId;
 }

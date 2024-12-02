@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.mydbs.insurance.insurance_management.model.Claim;
+import com.mydbs.insurance.insurance_management.model.ClaimAuthorizationRequest;
 import com.mydbs.insurance.insurance_management.model.ClaimRequest;
 import com.mydbs.insurance.insurance_management.repository.ClaimRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ public class ClaimService {
         Claim claim = new Claim();
         claim.setCustomerId(userService.getCurrentUserId());
         claim.setPolicyId(request.getPolicyId());
+        claim.setServiceProviderId(request.getServiceProviderId());
         claim.setAmount(request.getAmount());
         claim.setDescription(request.getDescription());
         claim.setStatus("SUBMITTED");
@@ -42,5 +45,24 @@ public class ClaimService {
             .orElseThrow(() -> new RuntimeException("Claim not found"));
         claim.setStatus("REJECTED");
         return claimRepository.save(claim);
+    }
+
+    public Claim authorizeClaim(String id, ClaimAuthorizationRequest request) {
+        Claim claim = claimRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Claim not found"));
+            
+        claim.setStatus("AUTHORIZED");
+        claim.setAmount(request.getAuthorizedAmount());
+        claim.setDescription(request.getNotes());
+
+        claim.setServiceProviderId(userService.getCurrentUserId());
+
+         
+        return claimRepository.save(claim);
+    }
+
+    public List<Claim> getPendingClaimsForProvider() {
+        String providerId = userService.getCurrentUserId();
+        return claimRepository.findByServiceProviderIdAndStatus(providerId, "SUBMITTED");
     }
 }

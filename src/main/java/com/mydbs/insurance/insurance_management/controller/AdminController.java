@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.mydbs.insurance.insurance_management.model.Policy;
+import com.mydbs.insurance.insurance_management.model.PolicyApplication;
 import com.mydbs.insurance.insurance_management.model.User;
 import com.mydbs.insurance.insurance_management.service.AdminService;
 
@@ -35,5 +36,14 @@ public class AdminController {
     @PutMapping("/providers/{id}/reject")
     public ResponseEntity<User> rejectServiceProvider(@PathVariable String id) {
         return ResponseEntity.ok(adminService.rejectServiceProvider(id));
+    }
+
+    @PutMapping("/applications/{id}/approve")
+    public ResponseEntity<PolicyApplication> approveApplication(@PathVariable String id) {
+        return ResponseEntity.ok(adminService.approveApplication(id));
+    }
+    @PutMapping("/applications/{id}/reject")
+    public ResponseEntity<PolicyApplication> rejectApplication(@PathVariable String id) {
+        return ResponseEntity.ok(adminService.rejectApplication(id));
     }
 }
