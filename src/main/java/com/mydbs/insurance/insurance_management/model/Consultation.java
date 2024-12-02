@@ -12,7 +12,7 @@ public class Consultation {
     private String id;
     private String customerId;
     private String serviceProviderId;
-    private String policyId;
+    private String planId;
     private LocalDateTime scheduledTime;
     private String status;
     private String notes;

@@ -17,4 +17,5 @@ public interface ClaimRepository extends MongoRepository<Claim, String> {
     long countByStatus(String status);
     List<Claim> findByPolicyId(String policyId);
     List<Claim> findTop10ByOrderByCreatedAtDesc();
+    List<Claim> findByServiceProviderIdAndStatus(String serviceProviderId, String status);
 }

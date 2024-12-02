@@ -21,7 +21,10 @@ public class ConsultationService {
         consultation.setCustomerId(userService.getCurrentUserId());
         consultation.setServiceProviderId(request.getServiceProviderId());
         consultation.setScheduledTime(request.getScheduledTime());
+        consultation.setNotes(request.getNotes());
+        consultation.setPlanId(request.getPlanId());
         consultation.setStatus("SCHEDULED");
+        consultation.setCreatedAt(java.time.LocalDateTime.now());
         return consultationRepository.save(consultation);
     }
 
@@ -36,4 +39,9 @@ public class ConsultationService {
         consultation.setStatus("COMPLETED");
         return consultationRepository.save(consultation);
     }
+    public List<Consultation> getProviderConsultations() {
+        String providerId = userService.getCurrentUserId();
+        return consultationRepository.findByServiceProviderId(providerId);
+    }
+    
 }

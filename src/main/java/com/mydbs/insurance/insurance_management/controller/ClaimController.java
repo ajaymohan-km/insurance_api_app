@@ -26,6 +26,12 @@ public class ClaimController {
         return ResponseEntity.ok(claimService.getUserClaims());
     }
 
+    @GetMapping("/provider")
+    public ResponseEntity<List<Claim>> getPendingClaimsForProvider() {
+        return ResponseEntity.ok(claimService.getPendingClaimsForProvider());
+    }
+
+
     @PutMapping("/{id}/approve")
     public ResponseEntity<Claim> approveClaim(@PathVariable String id) {
         return ResponseEntity.ok(claimService.approveClaim(id));

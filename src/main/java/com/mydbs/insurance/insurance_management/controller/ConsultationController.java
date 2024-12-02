@@ -30,4 +30,9 @@ public class ConsultationController {
     public ResponseEntity<Consultation> completeConsultation(@PathVariable String id) {
         return ResponseEntity.ok(consultationService.completeConsultation(id));
     }
+    @GetMapping("/provider")
+    public ResponseEntity<List<Consultation>> getProviderConsultations() {
+        return ResponseEntity.ok(consultationService.getProviderConsultations());
+    }
+
 }

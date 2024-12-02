@@ -12,7 +12,8 @@ import java.util.List;
 public interface UserRepository extends MongoRepository<User, String> {
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
-    List<User> findByRoles(String role);
+    List<User> findByRoles(String roles);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
+    List<User> findByRolesContainingAndEnabled(String roles, boolean enabled);
 }
